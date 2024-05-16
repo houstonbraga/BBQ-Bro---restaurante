@@ -347,70 +347,18 @@ cardapio.metodos = {
         cardapio.metodos.carregarEtapa(2);
 
     },
-
-    // API ViaCEP
-    buscarCep: () => {
-
-        // cria a variavel com o valor do cep
-        var cep = $("#txtCEP").val().trim().replace(/\D/g, '');
-
-        // verifica se o CEP possui valor informado
-        if (cep != "") {
-
-            // Expressão regular para validar o CEP
-            var validacep = /^[0-9]{8}$/;
-
-            if (validacep.test(cep)) {
-
-                $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
-
-                    if (!("erro" in dados)) {
-
-                        // Atualizar os campos com os valores retornados
-                        $("#txtEndereco").val(dados.logradouro);
-                        $("#txtBairro").val(dados.bairro);
-                        $("#txtCidade").val(dados.localidade);
-                        $("#ddlUf").val(dados.uf);
-                        $("#txtNumero").focus();
-
-                    }
-                    else {
-                        cardapio.metodos.mensagem('CEP não encontrado. Preencha as informações manualmente.');
-                        $("#txtEndereco").focus();
-                    }
-
-                })
-
-            }
-            else {
-                cardapio.metodos.mensagem('Formato do CEP inválido.');
-                $("#txtCEP").focus();
-            }
-
-        }
-        else {
-            cardapio.metodos.mensagem('Informe o CEP, por favor.');
-            $("#txtCEP").focus();
-        }
-
-    },
+    
+        
 
     // validação antes de prosseguir para a etapa 3
     resumoPedido: () => {
 
-        let cep = $("#txtCEP").val().trim();
         let endereco = $("#txtEndereco").val().trim();
         let bairro = $("#txtBairro").val().trim();
         let cidade = $("#txtCidade").val().trim();
-        let uf = $("#ddlUf").val().trim();
+        
         let numero = $("#txtNumero").val().trim();
         let complemento = $("#txtComplemento").val().trim();
-
-        if (cep.length <= 0) {
-            cardapio.metodos.mensagem('Informe o CEP, por favor.');
-            $("#txtCEP").focus();
-            return;
-        }
 
         if (endereco.length <= 0) {
             cardapio.metodos.mensagem('Informe o Endereço, por favor.');
@@ -430,11 +378,7 @@ cardapio.metodos = {
             return;
         }
 
-        if (uf == "-1") {
-            cardapio.metodos.mensagem('Informe a UF, por favor.');
-            $("#ddlUf").focus();
-            return;
-        }
+        
 
         if (numero.length <= 0) {
             cardapio.metodos.mensagem('Informe o Número, por favor.');
@@ -443,11 +387,9 @@ cardapio.metodos = {
         }
 
         MEU_ENDERECO = {
-            cep: cep,
             endereco: endereco,
             bairro: bairro,
             cidade: cidade,
-            uf: uf,
             numero: numero,
             complemento: complemento
         }
@@ -488,8 +430,7 @@ cardapio.metodos = {
             var texto = 'Olá! gostaria de fazer um pedido:';
             texto += `\n*Itens do pedido:*\n\n\${itens}`;
             texto += '\n*Endereço de entrega:*';
-            texto += `\n${MEU_ENDERECO.endereco}, ${MEU_ENDERECO.numero}, ${MEU_ENDERECO.bairro}`;
-            texto += `\n${MEU_ENDERECO.cidade}-${MEU_ENDERECO.uf} / ${MEU_ENDERECO.cep} ${MEU_ENDERECO.complemento}`;
+            texto += `\n${MEU_ENDERECO.endereco}, ${MEU_ENDERECO.numero}, ${MEU_ENDERECO.bairro}, \n${MEU_ENDERECO.cidade} / ${MEU_ENDERECO.complemento}`;
             texto += `\n\n*Total (com entrega): R$ ${(VALOR_CARRINHO + VALOR_ENTREGA).toFixed(2).replace('.', ',')}*`;
 
             var itens = '';
