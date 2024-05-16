@@ -143,13 +143,13 @@ a.navbar-brand {
 }
 
 .card-banner {
-    height: 450px;
+    height: 400px;
     width: 450px;
     border-radius: 170px;
-    background-color: #f4c949;
+    background-color: #ffd1abea;
     position: absolute;
     right: 0;
-    top: -80px;
+    top: -60px;
 }
 
 .img-banner img {
