@@ -356,7 +356,6 @@ cardapio.metodos = {
         let endereco = $("#txtEndereco").val().trim();
         let bairro = $("#txtBairro").val().trim();
         let cidade = $("#txtCidade").val().trim();
-        
         let numero = $("#txtNumero").val().trim();
         let complemento = $("#txtComplemento").val().trim();
 
@@ -416,7 +415,7 @@ cardapio.metodos = {
         });
 
         $("#resumoEndereco").html(`${MEU_ENDERECO.endereco}, ${MEU_ENDERECO.numero}, ${MEU_ENDERECO.bairro}`);
-        $("#cidadeEndereco").html(`${MEU_ENDERECO.cidade}-${MEU_ENDERECO.uf} / ${MEU_ENDERECO.cep} ${MEU_ENDERECO.complemento}`);
+        $("#cidadeEndereco").html(`${MEU_ENDERECO.cidade} / ${MEU_ENDERECO.complemento}`);
 
         cardapio.metodos.finalizarPedido();
 

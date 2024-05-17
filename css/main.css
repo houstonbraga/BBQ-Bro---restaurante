@@ -9,7 +9,7 @@
 }
 
 :root {
-    --color-background: #fffdf7;
+    --color-background: #fff3dc;
     --color-black: #212121;
     --color-black-heavy: #000000;
     --color-text: #4f4f4f;
@@ -172,7 +172,7 @@ a.navbar-brand {
     font-size: 14px;
     position: absolute;
     right: 0;
-    bottom: -75px;
+    bottom: 0;
 }
 
 .card-case-name {
